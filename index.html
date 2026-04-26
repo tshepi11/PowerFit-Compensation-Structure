@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerFit — Compensation Structure</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1B2A4A;
+  --gold: #D4A84C;
+  --blue: #417FD3;
+  --surface: #F8FAFC;
+  --text: #1B2A4A;
+  --muted: #64748B;
+  --border: #E2E8F0;
+  --white: #FFFFFF;
+  --green: #27AE60;
+  --red: #E74C3C;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background: var(--surface);
+  color: var(--text);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- HEADER ---- */
+.header {
+  background: var(--navy);
+  padding: 40px 60px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+
+.header .conf {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* ---- TABS ---- */
+.tabs {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tab {
+  padding: 14px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
+}
+
+.tab:hover { color: rgba(255,255,255,0.8); }
+.tab.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* ---- CONTENT ---- */
+.content {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 40px 80px;
+}
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+h2 {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  color: var(--navy);
+  letter-spacing: -0.5px;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--navy);
+}
+
+.subtitle {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 32px;
+  max-width: 640px;
+}
+
+.divider {
+  width: 48px;
+  height: 3px;
+  background: var(--gold);
+  margin: 16px 0 28px;
+  border-radius: 2px;
+}
+
+p { font-size: 16px; line-height: 1.8; max-width: 720px; margin-bottom: 14px; }
+
+.bold { font-weight: 700; }
+.gold { color: var(--gold); }
+.green { color: var(--green); }
+.red { color: var(--red); }
+
+/* ---- CARDS ---- */
+.grid { display: grid; gap: 20px; margin-top: 24px; }
+.g2 { grid-template-columns: 1fr 1fr; }
+.g3 { grid-template-columns: 1fr 1fr 1fr; }
+
+.card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 28px;
+}
+
+.card-navy {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+
+.card-gold { border-color: var(--gold); }
+.card-green { border-color: var(--green); background: rgba(39,174,96,0.03); }
+.card-red { border-color: var(--red); background: rgba(231,76,60,0.03); }
+
+.card-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.card-body {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.card-navy .card-body { color: rgba(255,255,255,0.7); }
+
+.card-stat {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.card-navy .card-stat { color: var(--gold); }
+
+/* ---- PHASE CARDS ---- */
+.phase-num {
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.phase-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.phase-range {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+
+.phase-detail {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+/* ---- TABLE ---- */
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 24px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th {
+  background: var(--navy);
+  color: var(--white);
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+tr:nth-child(even) { background: var(--surface); }
+
+.highlight-row { background: rgba(212,168,76,0.08) !important; font-weight: 700; }
+
+/* ---- EXAMPLE BLOCKS ---- */
+.example {
+  border-radius: 10px;
+  padding: 28px;
+  margin-bottom: 20px;
+}
+
+.example-blue { background: rgba(65,127,211,0.06); border: 1.5px solid rgba(65,127,211,0.15); }
+.example-red { background: rgba(231,76,60,0.04); border: 1.5px solid rgba(231,76,60,0.12); }
+.example-green { background: rgba(39,174,96,0.04); border: 1.5px solid rgba(39,174,96,0.12); }
+
+.example-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--navy);
+}
+
+.example-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.example-row:last-child { border-bottom: none; }
+
+.example-result {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ---- LIST ---- */
+.detail-list {
+  list-style: none;
+  margin-top: 16px;
+}
+
+.detail-list li {
+  padding: 12px 0;
+  font-size: 15px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.7;
+}
+
+.detail-list li:last-child { border-bottom: none; }
+
+.marker {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(212,168,76,0.15);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* ---- JOURNEY ---- */
+.journey {
+  display: flex;
+  gap: 0;
+  margin-top: 28px;
+  position: relative;
+}
+
+.journey::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--border);
+}
+
+.journey-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.journey-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin: 30px auto 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.journey-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.journey-text {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  padding: 0 8px;
+}
+
+/* ---- CALLOUT ---- */
+.callout {
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 10px;
+  padding: 28px;
+  margin-top: 28px;
+}
+
+.callout p { color: rgba(255,255,255,0.8); }
+.callout .bold { color: var(--white); }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+  .header { padding: 24px 20px 0; }
+  .content { padding: 32px 20px 60px; }
+  h2 { font-size: 24px; }
+  .g2, .g3 { grid-template-columns: 1fr; }
+  .tab { padding: 12px 16px; font-size: 12px; }
+  .journey { flex-direction: column; gap: 16px; }
+  .journey::before { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER + TABS -->
+<div class="header">
+  <div class="header-top">
+    <h1>PowerFit — Compensation Structure</h1>
+    <span class="conf">Confidential &bull; April 2026 &bull; Internal Use Only</span>
+  </div>
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('overview')">Overview</div>
+    <div class="tab" onclick="showTab('phases')">The Three Phases</div>
+    <div class="tab" onclick="showTab('numbers')">The Numbers</div>
+    <div class="tab" onclick="showTab('churn')">Churn Examples</div>
+    <div class="tab" onclick="showTab('equity')">Equity</div>
+    <div class="tab" onclick="showTab('journey')">The Bigger Picture</div>
+    <div class="tab" onclick="showTab('rules')">Key Rules</div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ===================== TAB: OVERVIEW ===================== -->
+<div class="panel active" id="overview">
+  <h2>How you earn at PowerFit.</h2>
+  <div class="divider"></div>
+  <p>This document outlines how compensation works for B2B Sales Partners joining the PowerFit Founding Circle. It is designed to be transparent — you will see exactly what you earn, when it changes, and why.</p>
+  <p>PowerFit is pre-revenue. There are no signed clients yet. You are joining something being built. These are not co-founder roles. PowerFit has one founder. But the people who join now are founding team members — early, valuable, and rewarded accordingly.</p>
+  <p>The structure has three phases. You move through them based on your own performance — how many clients you personally bring in. Each partner progresses independently.</p>
+  <p>This is honest work. Phase 1 is selling a product nobody has heard of. Phase 2 is building momentum. Phase 3 is leading a team and teaching them how to do what you did. None of it is easy. All of it is rewarded.</p>
+
+  <div class="grid g3" style="margin-top:32px;">
+    <div class="card card-navy" style="text-align:center;">
+      <div class="card-label">Phase 1</div>
+      <div class="card-stat">10%</div>
+      <div class="card-body">Upfront commission<br>+ 2% monthly recurring<br>No salary</div>
+    </div>
+    <div class="card card-navy" style="text-align:center;">
+      <div class="card-label">Phase 2</div>
+      <div class="card-stat">7%</div>
+      <div class="card-body">Upfront commission<br>+ 1% monthly recurring<br>R20,000 deal bonus</div>
+    </div>
+    <div class="card card-navy" style="text-align:center;">
+      <div class="card-label">Phase 3</div>
+      <div class="card-stat">5%</div>
+      <div class="card-body">Upfront only<br>Recurring stops<br>R60,000 salary</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><span class="bold">Why is the commission highest in Phase 1?</span></p>
+    <p>Because Phase 1 is the hardest. You are selling a product with zero clients and zero proof. Nobody wants to be first. The company you walk into has never heard of PowerFit. You have no case study, no reference client, no track record to point to. That is why the reward is the highest — you are being compensated for the difficulty and the risk.</p>
+  </div>
+</div>
+
+<!-- ===================== TAB: PHASES ===================== -->
+<div class="panel" id="phases">
+  <h2>The three phases.</h2>
+  <p class="subtitle">Each phase is triggered by your personal client count. You and your partner move through the phases independently.</p>
+  <div class="divider"></div>
+
+  <!-- Phase 1 -->
+  <div class="card" style="margin-bottom:20px;">
+    <div class="phase-num">01</div>
+    <div class="phase-title">Founding</div>
+    <div class="phase-range">Clients 1 – 10</div>
+    <div class="phase-detail">
+      <strong>No salary.</strong> Your income depends entirely on closing deals. This is the hardest phase and the one that pays the most per deal.<br><br>
+      <strong>What the selling looks like:</strong> You will be reaching out to HR decision-makers at companies that have never heard of PowerFit. You will face silence, rejection, and long procurement cycles. Nobody wants to be the first client. You need to be comfortable with that discomfort. The cold email, the follow-up, the meeting that leads nowhere, the one that finally does — that is the work.<br><br>
+      <strong>10% upfront commission</strong> on every deal you close. The annual contract value is R144,000. That means you earn R14,400 every time a client signs, paid when the client pays.<br><br>
+      <strong>2% monthly recurring</strong> for each client you brought in. That is R2,880 per client per month. This is paid to you every month for as long as PowerFit retains that client and you remain in Phase 1 or Phase 2.<br><br>
+      At 5 clients, your recurring is R14,400/month. At 10 clients, it is R28,800/month. The recurring builds with every deal you close — it rewards you for staying and for keeping clients happy.<br><br>
+      <strong>Time expectation:</strong> 18 months to reach 10 clients. That is roughly one new client every 7 weeks. If you have not reached 10 clients in 18 months, we will sit down together and assess what is working, what is not, and whether we need to adjust the approach. This is not an automatic termination — it is a performance conversation.
+    </div>
+  </div>
+
+  <!-- Phase 2 -->
+  <div class="card" style="margin-bottom:20px;">
+    <div class="phase-num">02</div>
+    <div class="phase-title">Traction</div>
+    <div class="phase-range">Clients 11 – 20</div>
+    <div class="phase-detail">
+      <strong>R20,000 deal bonus</strong> — paid in any month you close a deal. This is not a monthly salary. It is compensation for active selling. If you do not close a deal that month, the R20,000 is not paid. Your recurring income continues regardless — that is earned and protected.<br><br>
+      <strong>7% upfront commission</strong> on new deals. That is R10,080 per client. The commission is lower because the risk is lower — you now have proof. You have 10 clients behind you and a product that has been validated.<br><br>
+      <strong>1% monthly recurring</strong> on new Phase 2 clients. That is R1,440 per client per month. Your Phase 1 clients continue paying you 2%. So your recurring income is a mix of Phase 1 rates and Phase 2 rates.<br><br>
+      <strong>5% equity</strong> in PowerFit Wellness Solutions (Pty) Ltd is offered at this stage. It vests over 4 years at 25% per year. This is explained in the Equity tab.<br><br>
+      <strong>Time expectation:</strong> 12 months to reach 20 clients from the start of Phase 2. If progress stalls, we have a conversation.<br><br>
+      <strong>Why deal-based and not monthly?</strong> By Phase 2, your recurring income alone is strong. At 15 clients, you are earning R36,000/month in recurring without signing a single new deal. The R20,000 deal bonus exists to keep the momentum going. PowerFit pays you to sell, not to sit. If you are actively closing, your income is significant. If you stop, your recurring still protects you — but the R20,000 stops until the next deal.
+    </div>
+  </div>
+
+  <!-- Phase 3 -->
+  <div class="card card-gold">
+    <div class="phase-num">03</div>
+    <div class="phase-title">Scale</div>
+    <div class="phase-range">Clients 21+</div>
+    <div class="phase-detail">
+      <strong>Salary increases to R60,000/month.</strong> Your title becomes Head of B2B Sales. You are no longer selling solo — you are building and managing a sales team. This is a different kind of work. You are recruiting, training, and holding people accountable. You are teaching them how to sell a product you sold when nobody knew what it was. That experience is what makes you the right person to lead this.<br><br>
+      <strong>5% upfront commission</strong> on any deal you personally close. That is R7,200 per client. If you choose to go into the field yourself, you still earn on those deals.<br><br>
+      <strong>Recurring — the 6-month rule.</strong> When Phase 3 starts, recurring on any client signed more than 6 months ago stops immediately. You have already been compensated for those clients. For clients signed within the last 6 months before Phase 3, recurring continues until that client reaches 6 months from signing, then stops. Maximum 6 months into Phase 3, all recurring is done permanently. See the Churn Examples tab for a detailed walkthrough.<br><br>
+      <strong>Your team's commission</strong> is a separate structure that we will agree on together when the time comes. You will also earn an override on deals your team closes — meaning your earning potential does not stop at your own clients. It grows with every person you hire and develop.<br><br>
+      <strong>All clients belong to PowerFit.</strong> You do not own client relationships. You built them, you were rewarded generously for building them, and now they are part of the company you have equity in.<br><br>
+      <strong>What is expected of you at Phase 3:</strong> You are not just managing. You are building a sales function. That means hiring the right people, setting targets, running weekly check-ins, coaching your team through difficult deals, and being accountable for the pipeline. The R60,000 salary reflects this responsibility.
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><span class="bold">Phase transition discretion.</span></p>
+    <p>Phases are triggered by client count. However, the Founder reserves the right to extend Phase 2 terms for up to 6 months. This protects a partner who moves rapidly — for example, from 18 to 22 clients in a short period — and ensures they have had adequate time to benefit from Phase 2 recurring before transitioning. This is exercised in the interest of fairness.</p>
+  </div>
+</div>
+
+<!-- ===================== TAB: NUMBERS ===================== -->
+<div class="panel" id="numbers">
+  <h2>What the numbers look like.</h2>
+  <p class="subtitle">This table shows what you earn as you build your client base. All figures are based on an annual contract value of R144,000 per client.</p>
+  <div class="divider"></div>
+
+  <h3>Phase 1: Clients 1–10</h3>
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th>Client #</th>
+        <th>Upfront (R)</th>
+        <th>Monthly Recurring (R)</th>
+        <th>Total Recurring at this point (R/month)</th>
+      </tr>
+      <tr><td>1</td><td>14,400</td><td>2,880</td><td>2,880</td></tr>
+      <tr><td>2</td><td>14,400</td><td>2,880</td><td>5,760</td></tr>
+      <tr><td>3</td><td>14,400</td><td>2,880</td><td>8,640</td></tr>
+      <tr><td>5</td><td>14,400</td><td>2,880</td><td>14,400</td></tr>
+      <tr class="highlight-row"><td>10</td><td>14,400</td><td>2,880</td><td>28,800</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:16px;font-size:14px;" class="bold">At 10 clients, you are earning R28,800/month in recurring alone — before any new upfront commissions.</p>
+
+  <h3 style="margin-top:36px;">Phase 2: Clients 11–20</h3>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:12px;">Salary of R20,000/month is added. Phase 1 clients continue at 2% recurring.</p>
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th>Client #</th>
+        <th>Upfront (R)</th>
+        <th>Deal Bonus (R)</th>
+        <th>Deal Month Total (R)</th>
+        <th>Quiet Month (no deal) (R)</th>
+      </tr>
+      <tr><td>11</td><td>10,080</td><td>20,000</td><td>20,000 + 10,080 + 28,800 + 1,440 = 60,320</td><td>28,800 + 1,440 = 30,240</td></tr>
+      <tr><td>15</td><td>10,080</td><td>20,000</td><td>20,000 + 10,080 + 28,800 + 5,760 = 64,640</td><td>28,800 + 7,200 = 36,000</td></tr>
+      <tr><td>18</td><td>10,080</td><td>20,000</td><td>20,000 + 10,080 + 28,800 + 10,080 = 68,960</td><td>28,800 + 11,520 = 40,320</td></tr>
+      <tr class="highlight-row"><td>20</td><td>10,080</td><td>20,000</td><td>20,000 + 10,080 + 28,800 + 12,960 = 71,840</td><td>28,800 + 14,400 = 43,200</td></tr>
+    </table>
+  </div>
+  <p style="margin-top:16px;font-size:14px;" class="bold">The R20,000 is paid only in months you close a deal. Your recurring income is always there. The difference between a deal month and a quiet month is over R30,000 — that is the incentive to keep selling.</p>
+
+  <h3 style="margin-top:36px;">Phase 3: Clients 21+</h3>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:12px;">Salary increases to R60,000/month. Recurring on older clients stops immediately. Recent clients (signed within 6 months) continue until they reach 6 months, then stop.</p>
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th>Period</th>
+        <th>Salary (R)</th>
+        <th>Recurring (R)</th>
+        <th>Total Monthly (R)</th>
+      </tr>
+      <tr><td>Phase 3 starts — older clients</td><td>60,000</td><td>Stops immediately</td><td>60,000 + recent client recurring only</td></tr>
+      <tr><td>Phase 3 months 1-6 — recent clients winding down</td><td>60,000</td><td>Reducing as each recent client hits 6 months</td><td>60,000 + reducing recurring</td></tr>
+      <tr class="highlight-row"><td>After 6 months — all recurring done</td><td>60,000</td><td>0</td><td>60,000 + 5% on personal deals + team override</td></tr>
+    </table>
+  </div>
+
+  <div class="callout">
+    <p><span class="bold">The R60,000 is not a pay cut.</span></p>
+    <p>At Phase 3, you are no longer selling into the unknown. The product is proven, clients exist, and you are building a team. The R60,000 salary is monthly and guaranteed — unlike Phase 2 where the R20,000 was deal-based. On top of salary, you earn 5% on personal deals and an override on your team's deals. Combined with equity, that is an executive package.</p>
+  </div>
+</div>
+
+<!-- ===================== TAB: CHURN ===================== -->
+<div class="panel" id="churn">
+  <h2>What happens when a client leaves.</h2>
+  <p class="subtitle">Recurring commission is tied to client retention. If a client leaves, your recurring from that client stops. There is never a clawback on upfront commissions already paid.</p>
+  <div class="divider"></div>
+
+  <!-- Example 1 -->
+  <div class="example example-blue">
+    <div class="example-title">Example 1: Client completes 12 months and does not renew</div>
+    <div class="example-row"><span>Contract value paid upfront</span><span class="bold">R144,000</span></div>
+    <div class="example-row"><span>Your upfront commission (10%)</span><span>R14,400</span></div>
+    <div class="example-row"><span>Your recurring (2% x 11 months)</span><span>R31,680</span></div>
+    <div class="example-row"><span>Total you earned from this client</span><span class="bold">R46,080</span></div>
+    <div class="example-row"><span>Client does not renew after Month 12</span><span></span></div>
+    <div class="example-row"><span>Your recurring from this client</span><span class="red bold">Stops — R0 from Month 13</span></div>
+    <div class="example-result">You keep everything you earned. No penalty. No clawback. The recurring stops because the client left.</div>
+  </div>
+
+  <!-- Example 2 -->
+  <div class="example example-red">
+    <div class="example-title">Example 2: Client cancels at Month 6</div>
+    <div class="example-row"><span>Contract value paid upfront</span><span class="bold">R144,000</span></div>
+    <div class="example-row"><span>Your upfront commission (10%)</span><span>R14,400</span></div>
+    <div class="example-row"><span>Your recurring (2% x 5 months)</span><span>R14,400</span></div>
+    <div class="example-row"><span>Total you earned before churn</span><span class="bold">R28,800</span></div>
+    <div class="example-row"><span>Client exits at Month 6</span><span></span></div>
+    <div class="example-row"><span>Your recurring from this client</span><span class="red bold">Stops — R0 from Month 7</span></div>
+    <div class="example-result">You earned less because the client left early. But there is no clawback — you keep the R28,800. PowerFit retains the full contract payment already received.</div>
+  </div>
+
+  <!-- Example 3 -->
+  <div class="example example-blue">
+    <div class="example-title">Example 3: You have 10 clients, 2 churn at renewal</div>
+    <div class="example-row"><span>Monthly recurring before churn (10 x R2,880)</span><span class="bold">R28,800/month</span></div>
+    <div class="example-row"><span>2 clients do not renew</span><span></span></div>
+    <div class="example-row"><span>Monthly recurring after churn (8 x R2,880)</span><span>R23,040/month</span></div>
+    <div class="example-row"><span>Monthly income lost</span><span class="red">R5,760/month</span></div>
+    <div class="example-result">Churn reduces your recurring but does not wipe it out. You can replace churned clients with new ones at whatever phase rate applies. This is why maintaining client relationships matters — your income is tied to retention.</div>
+  </div>
+
+  <!-- Example 4 -->
+  <div class="example example-green">
+    <div class="example-title">Example 4: Phase 3 transition — how recurring stops</div>
+    <div class="example-row"><span>Phase 3 starts November 2026</span><span>Client 21 signed</span></div>
+    <div class="example-row"><span>Salary begins</span><span class="bold">R60,000/month</span></div>
+    <div class="example-row" style="margin-top:12px;border-top:2px solid var(--border);padding-top:12px;"><span colspan="2" class="bold">Clients signed MORE than 6 months before Phase 3:</span><span></span></div>
+    <div class="example-row"><span>Client 3 (signed Jan 2026 — 10 months ago)</span><span class="red bold">Recurring stops immediately in Nov</span></div>
+    <div class="example-row"><span>Client 7 (signed March 2026 — 8 months ago)</span><span class="red bold">Recurring stops immediately in Nov</span></div>
+    <div class="example-row"><span>Client 10 (signed April 2026 — 7 months ago)</span><span class="red bold">Recurring stops immediately in Nov</span></div>
+    <div class="example-row"><span>These clients have been paying you recurring for months. You have been well compensated.</span><span></span></div>
+    <div class="example-row" style="margin-top:12px;border-top:2px solid var(--border);padding-top:12px;"><span class="bold">Clients signed WITHIN 6 months of Phase 3:</span><span></span></div>
+    <div class="example-row"><span>Client 18 (signed July 2026 — 4 months ago)</span><span class="green">Recurring continues until Jan 2027</span></div>
+    <div class="example-row"><span>Client 19 (signed Sept 2026 — 2 months ago)</span><span class="green">Recurring continues until March 2027</span></div>
+    <div class="example-row"><span>Client 20 (signed Oct 2026 — 1 month ago)</span><span class="green">Recurring continues until April 2027</span></div>
+    <div class="example-row"><span>These clients are recent. You have not had enough time to benefit from the recurring. It continues until that client reaches 6 months from signing.</span><span></span></div>
+    <div class="example-row" style="margin-top:12px;border-top:2px solid var(--border);padding-top:12px;"><span class="bold">After April 2027 (6 months into Phase 3)</span><span></span></div>
+    <div class="example-row"><span>All recurring stops permanently</span><span class="red bold">R0 recurring</span></div>
+    <div class="example-row"><span>Salary continues</span><span class="green bold">R60,000/month</span></div>
+    <div class="example-row"><span>Equity active</span><span>5% vesting</span></div>
+    <div class="example-result">The recurring was the reward for building when there was no salary and no proof. By Phase 3, you have a salary, equity, a title, and a team. The business cannot carry recurring on top of all of that indefinitely. This is how we protect what we are building together.</div>
+  </div>
+
+  <!-- Example 5 -->
+  <div class="example example-blue">
+    <div class="example-title">Example 5: Phase 3 — you go into the field yourself</div>
+    <div class="example-row"><span>You are Head of B2B Sales with a team of 3</span><span></span></div>
+    <div class="example-row"><span>A prospect reaches out and wants to deal with you directly</span><span></span></div>
+    <div class="example-row"><span>You take the meeting, run the pitch, and close the deal</span><span></span></div>
+    <div class="example-row"><span>Contract value</span><span class="bold">R144,000</span></div>
+    <div class="example-row"><span>Your upfront commission (5%)</span><span>R7,200</span></div>
+    <div class="example-row"><span>Recurring</span><span class="red">None — Phase 3 has no recurring</span></div>
+    <div class="example-row" style="margin-top:12px;border-top:2px solid var(--border);padding-top:12px;"><span class="bold">Your total monthly income that month:</span><span></span></div>
+    <div class="example-row"><span>Salary</span><span>R60,000</span></div>
+    <div class="example-row"><span>Personal deal commission</span><span>R7,200</span></div>
+    <div class="example-row"><span>Total</span><span class="bold">R67,200</span></div>
+    <div class="example-result">You can still sell personally at Phase 3. You are not locked behind a desk. But the 5% upfront is a bonus on top of your salary — it is not your primary income anymore. Your primary role is building and managing the team.</div>
+  </div>
+
+  <!-- Example 6 -->
+  <div class="example example-green">
+    <div class="example-title">Example 6: Phase 3 — your team closes a deal</div>
+    <div class="example-row"><span>One of your team members closes a client</span><span></span></div>
+    <div class="example-row"><span>Contract value</span><span class="bold">R144,000</span></div>
+    <div class="example-row"><span>Team member earns their commission (separate structure)</span><span>TBD</span></div>
+    <div class="example-row"><span>You earn an override on the deal</span><span>TBD (to be agreed)</span></div>
+    <div class="example-row" style="margin-top:12px;border-top:2px solid var(--border);padding-top:12px;"><span class="bold">Why this matters:</span><span></span></div>
+    <div class="example-row"><span>If your team of 3 closes 2 deals each per month = 6 deals</span><span></span></div>
+    <div class="example-row"><span>Your override on 6 deals adds to your R60,000 salary</span><span></span></div>
+    <div class="example-row"><span>The more effective your team, the more you earn</span><span></span></div>
+    <div class="example-result">At Phase 3, your earning potential is not capped at your own effort. It grows with every person you hire, train, and develop. This is why Phase 3 is a leadership role — your income is tied to how well you build others.</div>
+  </div>
+</div>
+
+<!-- ===================== TAB: EQUITY ===================== -->
+<div class="panel" id="equity">
+  <h2>Equity.</h2>
+  <p class="subtitle">At 10 clients, a formal equity conversation takes place. Here is the proposed structure.</p>
+  <div class="divider"></div>
+
+  <div class="grid g2">
+    <div class="card">
+      <div class="card-label">Your equity</div>
+      <div class="card-stat">5%</div>
+      <div class="card-body">5% of PowerFit Wellness Solutions (Pty) Ltd. This means you own a piece of the company. If the company is sold, you receive 5% of the sale price. If the company pays dividends, you receive 5%.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Vesting</div>
+      <div class="card-stat">4 years</div>
+      <div class="card-body">Equity vests at 25% per year. After 1 year, you have earned 1.25%. After 2 years, 2.5%. After 4 years, the full 5%. If you leave before 4 years, you keep only what has vested.</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:36px;">What equity is not</h3>
+  <ul class="detail-list">
+    <li><span class="marker">1</span> Equity is not a salary increase. It does not change your monthly income.</li>
+    <li><span class="marker">2</span> Equity is not operational control. PowerFit has one founder. The Founder retains majority ownership (70%+) and full decision-making authority.</li>
+    <li><span class="marker">3</span> Equity is not guaranteed income. It only has value if the company grows.</li>
+  </ul>
+
+  <h3 style="margin-top:36px;">Protections</h3>
+  <ul class="detail-list">
+    <li><span class="marker">✓</span> <strong>Good leaver / bad leaver.</strong> If you are terminated for cause, unvested equity is forfeited.</li>
+    <li><span class="marker">✓</span> <strong>Right of first refusal.</strong> If you want to sell your shares, PowerFit has first option to buy them back. You cannot sell to an outside party without offering PowerFit first.</li>
+    <li><span class="marker">✓</span> <strong>Non-voting or limited voting.</strong> You receive economic rights (dividends, sale proceeds) but not the power to override business decisions.</li>
+    <li><span class="marker">✓</span> <strong>Shareholders agreement.</strong> A formal legal agreement will be drafted when the equity conversation takes place. This protects both you and the company.</li>
+  </ul>
+
+  <div class="callout">
+    <p><span class="bold">Why equity matters.</span></p>
+    <p>Equity is the long-term wealth builder. Your commissions and salary are your income today. Equity is your share of what PowerFit becomes tomorrow. If the company reaches 50 clients and someone offers to buy it at 3x revenue, your 5% is worth a significant amount — and you earned it because you were here when it was zero.</p>
+  </div>
+</div>
+
+<!-- ===================== TAB: JOURNEY ===================== -->
+<div class="panel" id="journey">
+  <h2>The bigger picture.</h2>
+  <p class="subtitle">This is not just a commission structure. It is a journey from founding partner to executive leader.</p>
+  <div class="divider"></div>
+
+  <div class="journey">
+    <div class="journey-step">
+      <div class="journey-label">Phase 1</div>
+      <div class="journey-dot"></div>
+      <div class="journey-text"><strong>You are a founder.</strong><br>No salary, no proof, no clients. You are selling something that does not exist in the market yet. Every yes you get is a breakthrough. This is the hardest work you will do at PowerFit.</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-label">Phase 2</div>
+      <div class="journey-dot"></div>
+      <div class="journey-text"><strong>You are a builder.</strong><br>The product is proven. You have clients, references, and momentum. A salary kicks in. Equity is on the table. You are no longer surviving — you are building.</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-label">Phase 3</div>
+      <div class="journey-dot"></div>
+      <div class="journey-text"><strong>You are a leader.</strong><br>You are no longer selling solo. You are recruiting, training, and managing a sales team. You are teaching them how to sell a product you sold when nobody knew what it was. Your income comes from salary, equity, and your team's performance. This is not easier. It is different. And it requires you to step up.</div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:40px;">
+    <p><span class="bold">Phase 3 is not a pay cut. It is a change in how you earn.</span></p>
+    <p>In Phase 1 and 2, you earned by doing the work yourself — every cold email, every meeting, every close. In Phase 3, you earn by building the machine that does the work. You still earn 5% on any deal you personally close. You earn an override on your team's deals. You have equity in the company. And you have a R60,000/month salary that does not depend on whether a prospect picks up the phone.</p>
+    <p>But let me be clear: Phase 3 is not a reward where you sit back. You are responsible for building a sales function. That means hiring, setting targets, running weekly check-ins, coaching people through deals they are struggling with, and being accountable when the pipeline is not moving. The people you hire will look to you for direction because you are the person who did it first. That is a responsibility, not a title.</p>
+    <p>The people who go through Phase 1 carry something that cannot be taught. They know the product because they sold it when nobody wanted it. They know the objections because they heard every single one. They know the market because they built the pipeline from scratch. That is what makes them the right person to lead a team.</p>
+  </div>
+
+  <h3 style="margin-top:36px;">What you are earning is not just money.</h3>
+  <ul class="detail-list">
+    <li><span class="marker">1</span> <strong>Equity in a company you helped build.</strong> You are not an employee who joined after the hard work was done. You were here at zero.</li>
+    <li><span class="marker">2</span> <strong>A leadership title you earned.</strong> Head of B2B Sales is not given — it is built through 20 clients, hundreds of conversations, and the credibility that comes from doing the work.</li>
+    <li><span class="marker">3</span> <strong>A team that reports to you.</strong> You built the sales engine. Now you run it.</li>
+    <li><span class="marker">4</span> <strong>Income from your team's efforts.</strong> Every deal your team closes generates revenue for the company and an override for you. Your earning potential does not stop at 20 clients — it grows with every person you hire and train.</li>
+    <li><span class="marker">5</span> <strong>A founding story.</strong> When PowerFit scales, you are not someone who joined after the hard work was done. You are the person who was here when there were zero clients and zero revenue. That means something.</li>
+  </ul>
+</div>
+
+<!-- ===================== TAB: RULES ===================== -->
+<div class="panel" id="rules">
+  <h2>Key rules.</h2>
+  <p class="subtitle">These rules apply across all phases. They are here so there are no surprises.</p>
+  <div class="divider"></div>
+
+  <ul class="detail-list">
+    <li><span class="marker">1</span> <strong>All clients belong to PowerFit Wellness Solutions (Pty) Ltd.</strong> You do not own client relationships. You are rewarded for building them through commissions, recurring, and equity — but the client relationship belongs to the company.</li>
+    <li><span class="marker">2</span> <strong>Recurring is paid for as long as PowerFit retains the client.</strong> If a client churns, your recurring from that client stops immediately. This incentivises client retention — your income is tied to keeping clients happy.</li>
+    <li><span class="marker">3</span> <strong>There is no clawback on upfront commissions.</strong> Once paid, the upfront commission is yours regardless of what happens with the client.</li>
+    <li><span class="marker">4</span> <strong>Recurring stops at Phase 3 — the 6-month rule.</strong> When Phase 3 starts, recurring on clients signed more than 6 months ago stops immediately. Recurring on clients signed within the last 6 months continues until that client reaches 6 months from signing, then stops. Maximum 6 months into Phase 3, all recurring is permanently done.</li>
+    <li><span class="marker">5</span> <strong>If you leave, recurring stops.</strong> If you leave PowerFit voluntarily or are terminated, all recurring payments stop immediately from the date of departure. No clawback on upfront commissions already paid. Unvested equity is forfeited. Vested equity is retained subject to the shareholders agreement.</li>
+    <li><span class="marker">6</span> <strong>Non-compete and non-solicitation.</strong> A 12-month non-compete and non-solicitation period applies after departure. You may not contact PowerFit clients or compete directly in the same market for 12 months.</li>
+    <li><span class="marker">7</span> <strong>Phases are per partner.</strong> You and your partner move through the phases independently based on your own client count. If one partner is at Phase 2 and the other is still in Phase 1, each earns according to their own phase.</li>
+    <li><span class="marker">8</span> <strong>Time expectations.</strong> Phase 1: 18 months to reach 10 clients. Phase 2: 12 months to reach 20 clients. These are not automatic terminations. If you are not on track, we sit down and assess together. But there is an expectation to keep moving.</li>
+    <li><span class="marker">9</span> <strong>The R20,000 in Phase 2 is deal-based.</strong> It is paid in any month you close a deal. No deal, no R20,000. Your recurring income is not affected — that is earned and always protected. The R20,000 exists to reward active selling, not to fund comfort.</li>
+    <li><span class="marker">10</span> <strong>PowerFit has one founder.</strong> These are not co-founder roles. PowerFit Wellness Solutions was founded by Tshepiso Power. Founding Circle members are founding team members — early, valuable, and rewarded accordingly — but not co-founders.</li>
+    <li><span class="marker">11</span> <strong>Team commission is separate.</strong> Any sales team you build in Phase 3 will have its own commission structure. That structure will be agreed on between you and the Founder when the time comes. It does not follow the same rates as your personal structure.</li>
+    <li><span class="marker">12</span> <strong>Coaching.</strong> PowerFit has brought on a coach who will work with the entire team including the Founder. Coaching sessions begin from June. This is part of how we grow together — not just as salespeople, but as leaders.</li>
+  </ul>
+
+  <div class="callout" style="margin-top:28px;">
+    <p><span class="bold">A final note.</span></p>
+    <p>This compensation structure was designed to be generous to the people who believe in PowerFit before anyone else does. The recurring commissions, the equity, the phased salary increases — all of it is built to reward the risk you are taking by joining a pre-revenue startup.</p>
+    <p>In return, PowerFit asks for commitment, consistency, and honesty. If the product is wrong, say so. If the pitch is not landing, tell me. If something is not working, raise it. This is a founding team, not a job. We build this together.</p>
+  </div>
+
+  <div style="margin-top:40px;padding-top:24px;border-top:1px solid var(--border);">
+    <p class="bold" style="margin-bottom:4px;">Tshepiso Power</p>
+    <p style="color:var(--muted);font-size:14px;">Founder, PowerFit Wellness Solutions<br>powerfitwellness.co.za</p>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: document.querySelector('.content').offsetTop, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
